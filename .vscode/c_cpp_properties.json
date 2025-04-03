@@ -1,20 +1,99 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
 {
     "configurations": [
         {
-            "name": "Win32",
+            "name": "PlatformIO",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/STM32F0xx_HAL_Driver/Inc"
+                "C:/Users/sexyl/5780-Group-A/include",
+                "C:/Users/sexyl/5780-Group-A/src",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/CMSIS/Include",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/CMSIS/Device/ST/STM32F0xx/Include",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/STM32F0xx_HAL_Driver/Inc",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/STM32F0xx_HAL_Driver/Src",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/CMSIS/DSP/Include",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/Common",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/hx8347d",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/i3g4250d",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/l3gd20",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/spfd5408",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/st7735",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/stlm75",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Adafruit_Shield",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Utilities/CPU",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Utilities/Fonts",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Utilities/Log",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Core/Src",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Src",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc",
+                "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src",
+                ""
             ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/sexyl/5780-Group-A/include",
+                    "C:/Users/sexyl/5780-Group-A/src",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/CMSIS/Include",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/CMSIS/Device/ST/STM32F0xx/Include",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/STM32F0xx_HAL_Driver/Inc",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/STM32F0xx_HAL_Driver/Src",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/CMSIS/DSP/Include",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/Common",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/hx8347d",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/i3g4250d",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/l3gd20",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/spfd5408",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/st7735",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Components/stlm75",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Drivers/BSP/Adafruit_Shield",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Utilities/CPU",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Utilities/Fonts",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Utilities/Log",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Core/Src",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Src",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc",
+                    "C:/Users/sexyl/.platformio/packages/framework-stm32cubef0/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src",
+                    ""
+                ]
+            },
             "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
+                "PLATFORMIO=60118",
+                "STM32F0",
+                "STM32F072xB",
+                "USE_HAL_DRIVER",
+                "F_CPU=48000000L",
+                ""
             ],
             "compilerPath": "C:/Users/sexyl/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc.exe",
-            "cStandard": "c11",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "windows-gcc-arm"
+            "compilerArgs": [
+                "-mthumb",
+                "-mcpu=cortex-m0",
+                ""
+            ]
         }
     ],
     "version": 4
