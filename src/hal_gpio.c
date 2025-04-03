@@ -85,59 +85,9 @@ void Configure_EXTI_UserButton(void)
     assert((SYSCFG->EXTICR[0] & 0xF) == 0x0);
 }
 
-// For lab 3.2
+/*
+We need to initilize a tim3 clock
+*/
 void TIM3_PWM(void) {
-    // Enable TIM3 clock
-    RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
 
-    // Configure timer 3 for 800 Hz
-    TIM3->PSC = 100; // Set PSC to 100 = 8 MHz / 100 = 80 kHz 
-    TIM3->ARR = 99; // Set ARR to 100 = 80 kHz / 100 - 1 = 800 Hz
-
-    TIM3->CCMR1 &= ~(TIM_CCMR1_OC1M | TIM_CCMR1_OC2M); // Clear bits
-
-    // Configure Channel 1 (PWM Mode 2)
-    TIM3->CCMR1 |= (7 << TIM_CCMR1_OC1M_Pos); // PWM Mode 2
-    // Configure Channel 2 (PWM Mode 1)
-    TIM3->CCMR1 |= (6 << TIM_CCMR1_OC2M_Pos); // PWM Mode 1
-
-    // Enable preload
-    TIM3->CCMR1 |= TIM_CCMR1_OC2PE;
-    TIM3->CCMR1 |= TIM_CCMR1_OC1PE;
-
-    // Enable Output for CH1 & CH2
-    TIM3->CCER |= TIM_CCER_CC1E; // Enable CH1 output
-    TIM3->CCER |= TIM_CCER_CC2E; // Enable CH2 output
-
-    // Enable TIM3 counter
-    TIM3->CR1 |= TIM_CR1_CEN;
-
-    TIM3->CCR1 = 20; // Red LED duty cycle
-    // duty cycle > 20, the red LED will be dimmer
-    // duty cycle < 20, the red LED will be brighter
-
-    TIM3->CCR2 = 20; // Blue LED (?) duty cycle
-    // duty cycle > 20, the blue LED will be brighter
-    // duty cycle < 20, the blue LED will be dimmer
 }
-
-// For Lab 3.2
-void GPIO_Init_TIM3_PWM(void)
-{
-    // Enable GPIOC clock
-    RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
-
-    // Clear mode bits for PC6 and PC7
-    GPIOC->MODER &= ~(0b11 << (6 * 2)); // Clear mode bits for PC6
-    GPIOC->MODER &= ~(0b11 << (7 * 2)); // Clear mode bits for PC7
-
-    // Set PC6 and PC7 to alternate Mode
-    GPIOC->MODER |= (0b10 << (6 * 2)); // Set PC6 to alternate mode
-    GPIOC->MODER |= (0b10 << (7 * 2)); // Set PC7 to alternate mode
-
-    // Set PC6 and PC7 to AF0 (TIM3_CH1 and TIM3_CH2)
-    GPIOC->AFR[0] &= ~(0b1111 << (6 * 4));  // AF bits for PC6
-    GPIOC->AFR[0] &= ~(0b1111 << (7 * 4));  // AF bits for PC7
-}
-
-
