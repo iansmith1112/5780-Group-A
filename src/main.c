@@ -120,7 +120,7 @@ void setup_rmt(void)
     // clk_div = 8 => 80MHz / 8 = 10MHz
     *RMT_CH0CONF0_REG |= 0x8;
 
-    // Example: set 1 block of memory (bit24=1 -> that’s a placeholder, not strictly correct)
+    // set 1 block of memory
     *RMT_CH0CONF0_REG |= (0x1 << 24);
 
     // Disable carrier
