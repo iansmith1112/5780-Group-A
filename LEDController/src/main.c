@@ -1,13 +1,3 @@
-// #include "main.h"
-// #include <stm32f0xx_hal.h>
-
-// int main(void)
-// {
-//     #if defined (ledStripTest)
-//         ledStripTestMain();
-//     #endif
-// }
-
 #include <stdint.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -137,7 +127,6 @@ void setup_rmt(void)
 
     // Enable RMT (APB) clock
     *RMT_APB_CONF_REG |= 1;
-    *RMT_INT_ENA_REG  |= 1;
 }
 
 // ---------------------------------------------------------------------------
@@ -149,11 +138,11 @@ void app_main(void)
     setup_rmt();
 
     // Clear RMT channel 0 memory
-    *RMT_CH0CONF1_REG &= ~(1 << 2);
-    uint32_t* rmt_data = (uint32_t*)RMT_DATA;
-    for(int i = 0; i < 48; i++) {
-        rmt_data[i] = 0;
-    }
+    // *RMT_CH0CONF1_REG &= ~(1 << 2);
+    // uint32_t* rmt_data = (uint32_t*)RMT_DATA;
+    // for(int i = 0; i < 48; i++) {
+    //     rmt_data[i] = 0;
+    // }
     *RMT_CH0CONF1_REG &= ~(1 << 6);
 
     // Transmit red
