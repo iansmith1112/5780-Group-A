@@ -2,9 +2,13 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+#include "driver/pulse_cnt.h"
+
 // ---------------------------------------------------------------------------
 // DUMMY REGISTER & MACRO DEFINITIONS (addresses/values not necessarily accurate)
 // ---------------------------------------------------------------------------
+
+
 #define RMT_CH0CONF0_REG           ((volatile uint32_t *)0x3ff56020)
 #define RMT_CH0CONF1_REG           ((volatile uint32_t *)0x3ff56024)
 #define RMT_CH0CARRIER_DUTY_REG    ((volatile uint32_t *)0x3FF560B0)
@@ -116,7 +120,7 @@ void setup_rmt(void)
     // Disable carrier
     *RMT_CH0CONF0_REG &= ~(0x1 << 28);
 
-    // Enable idle output, etc. (bit17=1 is just an example)
+    // Enable idle output
     *RMT_CH0CONF1_REG |= (0x1 << 17);
 
     // Memory owner => transmitter
@@ -137,12 +141,7 @@ void app_main(void)
     setup_gpio();
     setup_rmt();
 
-    // Clear RMT channel 0 memory
-    // *RMT_CH0CONF1_REG &= ~(1 << 2);
-    // uint32_t* rmt_data = (uint32_t*)RMT_DATA;
-    // for(int i = 0; i < 48; i++) {
-    //     rmt_data[i] = 0;
-    // }
+    
     *RMT_CH0CONF1_REG &= ~(1 << 6);
 
     // Transmit red
