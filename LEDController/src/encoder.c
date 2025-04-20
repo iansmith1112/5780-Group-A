@@ -42,7 +42,7 @@ void setup_gpio_pcnt(void)
 {
     // Enable PCNT peripheral clock
     REG_VAL(DPORT_PERIP_CLK_EN_REG) |= DPORT_PCNT_CLK_EN;
-    REG_VAL(DPORT_PERIP_RST_EN_REG) &= DPORT_PCNT_RST;
+    REG_VAL(DPORT_PERIP_RST_EN_REG) &= ~DPORT_PCNT_RST;
 
     /// Configure the GPIO_FUNCy_IN_SEL_CFG register corresponding to peripheral signal Y in the GPIO Matrix:
         // Set GPIO_SIGy_IN_SEL to enable peripheral signal input via GPIO matrix.
@@ -82,6 +82,17 @@ void pcnt_init(void)
     // conf0 |= PCNT_FILTER_EN_U0;                        // simple de‑glitch filter  
     // conf0 |= PCNT_THR_THRES0_EN_U0                     // PCNT_THR_THRES0_EN
     // conf0 |= 500;                                      // Set threshold to 6.25us which is standard for encoders
+
+        // 1 = PCNT_COUNT_INC
+    conf0  = (1 << PCNT_CH0_POS_MODE_U0_S)  // +1 on rising
+    | (1 << PCNT_CH0_NEG_MODE_U0_S); // +1 on falling
+    // and keep a constant “count enabled” by tying the ctrl input high:
+    conf0 |= (0 /* PCNT_H_L_KEEP */ << PCNT_CH0_HCTRL_MODE_U0_S)
+    | (0 /* PCNT_H_L_KEEP */ << PCNT_CH0_LCTRL_MODE_U0_S);
+    REG_VAL(PCNT_U0_CONF0_REG) = conf0;
+
+
+    REG_VAL(PCNT_U0_CONF2_REG) = ((uint32_t)(-1000) << 16) | (1000 & 0xFFFF);
     conf0 |= 1 << PCNT_CH0_NEG_MODE_U0_S;                 // increment on falling edge
     REG_VAL(PCNT_U0_CONF0_REG) = conf0;
 

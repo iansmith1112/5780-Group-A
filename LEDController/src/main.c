@@ -133,27 +133,27 @@ void app_main(void)
     pcnt_init(); // setup the pcnt registers
     pcnt_isr_attach();
 
-    // These are values that I got from Espressifs example after printing out the registers. These didn't change the fact I still can't increment the counter
+    // These are values that I got from Espressifs example after printing out the registers. These didn't change the fact I still can't increment the counter.
     REG_VAL(PCNT_U0_CONF0_REG) = 0x4649fc50;
     REG_VAL(PCNT_U0_CONF1_REG) = 0xffce0032;
     REG_VAL(PCNT_U0_CONF2_REG) = 0xff9c0064;
     
     
-    ESP_LOGI("ENC", "PCNT_U0_CONF0_REG: 0x%x", REG_VAL(PCNT_U0_CONF0_REG));
-    ESP_LOGI("ENC", "PCNT_U0_CONF1_REG: 0x%x", REG_VAL(PCNT_U0_CONF1_REG));
-    ESP_LOGI("ENC", "PCNT_U0_CONF2_REG: 0x%x", REG_VAL(PCNT_U0_CONF2_REG));
-    ESP_LOGI("ENC", "PCNT_U0_STATUS_REG: 0x%x", REG_VAL(PCNT_U0_STATUS_REG));
-    ESP_LOGI("ENC", "PCNT_INT_ENA_REG: 0x%x", REG_VAL(PCNT_INT_ENA_REG));
-    ESP_LOGI("ENC", "PCNT_CTRL_REG: 0x%x", REG_VAL(PCNT_CTRL_REG));
-    ESP_LOGI("ENC", "GPIO_FUNC39_IN_SEL_CFG: 0x%x", REG_VAL(GPIO_FUNC39_IN_SEL_CFG_REG)); 
-    ESP_LOGI("ENC", "GPIO_FUNC41_IN_SEL_CFG: 0x%x", REG_VAL(GPIO_FUNC41_IN_SEL_CFG_REG));
-    ESP_LOGI("ENC", "GPIO_FUNC2_OUT_SEL_CFG: 0x%x", REG_VAL(GPIO_FUNC2_OUT_SEL_CFG_REG));
-    ESP_LOGI("ENC", "GPIO_FUNC16_OUT_SEL_CFG: 0x%x", REG_VAL(GPIO_FUNC16_OUT_SEL_CFG_REG));
-    ESP_LOGI("ENC", "GPIO_ENABLE_REG: 0x%x", REG_VAL(GPIO_ENABLE_REG));
-    ESP_LOGI("ENC", "DPORT_PRO_PCNT_INTR_MAP: 0x%x", REG_VAL(DPORT_PRO_PCNT_INTR_MAP));
-    ESP_LOGI("ENC", "DPORT_PERIP_CLK_EN_REG: 0x%x", REG_VAL(DPORT_PERIP_CLK_EN_REG));
-    ESP_LOGI("ENC", "IO_MUX_GPIO2: 0x%x", REG_VAL(IO_MUX_GPIO2_REG));
-    ESP_LOGI("ENC", "IO_MUX_GPIO16: 0x%x", REG_VAL(IO_MUX_GPIO16_REG));
+    ESP_LOGI("ENC", "PCNT_U0_CONF0_REG: 0x%x", (unsigned int)REG_VAL(PCNT_U0_CONF0_REG));
+    ESP_LOGI("ENC", "PCNT_U0_CONF1_REG: 0x%x", (unsigned int)REG_VAL(PCNT_U0_CONF1_REG));
+    ESP_LOGI("ENC", "PCNT_U0_CONF2_REG: 0x%x", (unsigned int)REG_VAL(PCNT_U0_CONF2_REG));
+    ESP_LOGI("ENC", "PCNT_U0_STATUS_REG: 0x%x", (unsigned int)REG_VAL(PCNT_U0_STATUS_REG));
+    ESP_LOGI("ENC", "PCNT_INT_ENA_REG: 0x%x", (unsigned int)REG_VAL(PCNT_INT_ENA_REG));
+    ESP_LOGI("ENC", "PCNT_CTRL_REG: 0x%x", (unsigned int)REG_VAL(PCNT_CTRL_REG));
+    ESP_LOGI("ENC", "GPIO_FUNC39_IN_SEL_CFG: 0x%x", (unsigned int)(GPIO_FUNC39_IN_SEL_CFG_REG)); 
+    ESP_LOGI("ENC", "GPIO_FUNC41_IN_SEL_CFG: 0x%x", (unsigned int)REG_VAL(GPIO_FUNC41_IN_SEL_CFG_REG));
+    ESP_LOGI("ENC", "GPIO_FUNC2_OUT_SEL_CFG: 0x%x", (unsigned int)REG_VAL(GPIO_FUNC2_OUT_SEL_CFG_REG));
+    ESP_LOGI("ENC", "GPIO_FUNC16_OUT_SEL_CFG: 0x%x", (unsigned int)REG_VAL(GPIO_FUNC16_OUT_SEL_CFG_REG));
+    ESP_LOGI("ENC", "GPIO_ENABLE_REG: 0x%x", (unsigned int)REG_VAL(GPIO_ENABLE_REG));
+    ESP_LOGI("ENC", "DPORT_PRO_PCNT_INTR_MAP: 0x%x", (unsigned int)REG_VAL(DPORT_PRO_PCNT_INTR_MAP_REG));
+    ESP_LOGI("ENC", "DPORT_PERIP_CLK_EN_REG: 0x%x", (unsigned int)REG_VAL(DPORT_PERIP_CLK_EN_REG));
+    ESP_LOGI("ENC", "IO_MUX_GPIO2: 0x%x", (unsigned int)REG_VAL(IO_MUX_GPIO2_REG));
+    ESP_LOGI("ENC", "IO_MUX_GPIO16: 0x%x", (unsigned int)REG_VAL(IO_MUX_GPIO16_REG));
 
 
 
@@ -291,21 +291,21 @@ void app_main(void)
 //      int pulse_count = 0;
 //      int event_count = 0;
 
-//     ESP_LOGI("ENC", "PCNT_U0_CONF0_REG: 0x%x", REG_VAL(PCNT_U0_CONF0_REG));
-//     ESP_LOGI("ENC", "PCNT_U0_CONF1_REG: 0x%x", REG_VAL(PCNT_U0_CONF1_REG));
-//     ESP_LOGI("ENC", "PCNT_U0_CONF2_REG: 0x%x", REG_VAL(PCNT_U0_CONF2_REG));
-//     ESP_LOGI("ENC", "PCNT_U0_STATUS_REG: 0x%x", REG_VAL(PCNT_U0_STATUS_REG));
-//     ESP_LOGI("ENC", "PCNT_INT_ENA_REG: 0x%x", REG_VAL(PCNT_INT_ENA_REG));
-//     ESP_LOGI("ENC", "PCNT_CTRL_REG: 0x%x", REG_VAL(PCNT_CTRL_REG));
-//     ESP_LOGI("ENC", "GPIO_FUNC39_IN_SEL_CFG: 0x%x", REG_VAL(GPIO_FUNC39_IN_SEL_CFG_REG)); 
-//     ESP_LOGI("ENC", "GPIO_FUNC41_IN_SEL_CFG: 0x%x", REG_VAL(GPIO_FUNC41_IN_SEL_CFG_REG));
-//     ESP_LOGI("ENC", "GPIO_FUNC2_OUT_SEL_CFG: 0x%x", REG_VAL(GPIO_FUNC2_OUT_SEL_CFG_REG));
-//     ESP_LOGI("ENC", "GPIO_FUNC16_OUT_SEL_CFG: 0x%x", REG_VAL(GPIO_FUNC16_OUT_SEL_CFG_REG));
-//     ESP_LOGI("ENC", "GPIO_ENABLE_REG: 0x%x", REG_VAL(GPIO_ENABLE_REG));
-//     ESP_LOGI("ENC", "DPORT_PRO_PCNT_INTR_MAP: 0x%x", REG_VAL(DPORT_PRO_PCNT_INTR_MAP));
-//     ESP_LOGI("ENC", "DPORT_PERIP_CLK_EN_REG: 0x%x", REG_VAL(DPORT_PERIP_CLK_EN_REG));
-//     ESP_LOGI("ENC", "IO_MUX_GPIO2: 0x%x", REG_VAL(IO_MUX_GPIO2_REG));
-//     ESP_LOGI("ENC", "IO_MUX_GPIO16: 0x%x", REG_VAL(IO_MUX_GPIO16_REG));
+// ESP_LOGI("ENC", "PCNT_U0_CONF0_REG: 0x%x", (unsigned int)REG_VAL(PCNT_U0_CONF0_REG));
+// ESP_LOGI("ENC", "PCNT_U0_CONF1_REG: 0x%x", (unsigned int)REG_VAL(PCNT_U0_CONF1_REG));
+// ESP_LOGI("ENC", "PCNT_U0_CONF2_REG: 0x%x", (unsigned int)REG_VAL(PCNT_U0_CONF2_REG));
+// ESP_LOGI("ENC", "PCNT_U0_STATUS_REG: 0x%x", (unsigned int)REG_VAL(PCNT_U0_STATUS_REG));
+// ESP_LOGI("ENC", "PCNT_INT_ENA_REG: 0x%x", (unsigned int)REG_VAL(PCNT_INT_ENA_REG));
+// ESP_LOGI("ENC", "PCNT_CTRL_REG: 0x%x", (unsigned int)REG_VAL(PCNT_CTRL_REG));
+// ESP_LOGI("ENC", "GPIO_FUNC39_IN_SEL_CFG: 0x%x", (unsigned int)(GPIO_FUNC39_IN_SEL_CFG_REG)); 
+// ESP_LOGI("ENC", "GPIO_FUNC41_IN_SEL_CFG: 0x%x", (unsigned int)REG_VAL(GPIO_FUNC41_IN_SEL_CFG_REG));
+// ESP_LOGI("ENC", "GPIO_FUNC2_OUT_SEL_CFG: 0x%x", (unsigned int)REG_VAL(GPIO_FUNC2_OUT_SEL_CFG_REG));
+// ESP_LOGI("ENC", "GPIO_FUNC16_OUT_SEL_CFG: 0x%x", (unsigned int)REG_VAL(GPIO_FUNC16_OUT_SEL_CFG_REG));
+// ESP_LOGI("ENC", "GPIO_ENABLE_REG: 0x%x", (unsigned int)REG_VAL(GPIO_ENABLE_REG));
+// ESP_LOGI("ENC", "DPORT_PRO_PCNT_INTR_MAP: 0x%x", (unsigned int)REG_VAL(DPORT_PRO_PCNT_INTR_MAP_REG));
+// ESP_LOGI("ENC", "DPORT_PERIP_CLK_EN_REG: 0x%x", (unsigned int)REG_VAL(DPORT_PERIP_CLK_EN_REG));
+// ESP_LOGI("ENC", "IO_MUX_GPIO2: 0x%x", (unsigned int)REG_VAL(IO_MUX_GPIO2_REG));
+// ESP_LOGI("ENC", "IO_MUX_GPIO16: 0x%x", (unsigned int)REG_VAL(IO_MUX_GPIO16_REG));
 
 //     REG_VAL(IO_MUX_GPIO2_REG) &= ~(FUN_PU | FUN_PD | MCU_SEL);  // disable pull down and up 
 //     REG_VAL(IO_MUX_GPIO16_REG) &= ~(FUN_PU | FUN_PD | MCU_SEL); // disable pull down and up
