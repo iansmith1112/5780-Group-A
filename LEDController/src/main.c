@@ -81,7 +81,7 @@ void rmt_tx(void)
 void setup_gpio(void)
 {
     // Enable RMT peripheral clock
-    REG_VAL(DPORT_PERIP_CLK_EN_REG) |= DPORT_PCNT_CLK_EN;
+    REG_VAL(DPORT_PERIP_CLK_EN_REG) |= DPORT_RMT_CLK_EN;
 
     // Enable GPIO pin 4 for output
     REG_VAL(GPIO_ENABLE_REG) |= (1 << RMT_PIN);
