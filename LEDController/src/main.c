@@ -45,6 +45,9 @@ static rmt_item32_t reset = { .duration0 = T_RESET, .level0=0, .duration1=T_RESE
 // ---------------------------------------------------------------------------
 void rmt_fill_ws2812_data(uint8_t g, uint8_t r, uint8_t b)
 {
+    // Reset the write position
+    REG_VAL(RMT_CH0CONF1_REG) &= ~RMT_MEM_WR_RST_CH0;
+
     volatile rmt_item32_t* mem = (volatile rmt_item32_t*) RMT_DATA;
     uint32_t grb = ((uint32_t)g << 16) | ((uint32_t)r << 8) | b;
 
@@ -122,6 +125,7 @@ void setup_rmt(void)
 
     // Enable RMT (APB) clock
     REG_VAL(RMT_APB_CONF_REG) |= 1; // RMT_MEM_ACCESS_EN
+    REG_VAL(RMT_INT_ENA_REG) |= RMT_CH0_TX_END_INT_ENA;
 }
 
 // ---------------------------------------------------------------------------
@@ -158,19 +162,28 @@ void app_main(void)
     // ESP_LOGI("ENC", "IO_MUX_GPIO2: 0x%x", (unsigned int)REG_VAL(IO_MUX_GPIO2_REG));
     // ESP_LOGI("ENC", "IO_MUX_GPIO16: 0x%x", (unsigned int)REG_VAL(IO_MUX_GPIO16_REG));
 
+    // Clear RMT channel 0 memory
+    uint32_t* rmt_data = (uint32_t*)RMT_DATA;
+    for(int i = 0; i < 48; i++) {
+        rmt_data[i] = 0;
+    }
 
 
-    // Right now I'm just getting stuck here and my cnt does not increment no matter what. 
+    // // Right now I'm just getting stuck here and my cnt does not increment no matter what. 
     // int16_t cnt = 0;
-    // while(!isr_hit){
-    //     cnt = (int16_t)(REG_VAL(PCNT_U0_CNT_REG));
-    //     ESP_LOGI("ENC", "%hx", cnt);
-
-    //     ESP_LOGI("ENC", "GPIO2: 0x%x", gpio_get_level(2));
-    //     ESP_LOGI("ENC", "GPIO16: 0x%x", gpio_get_level(16));
-
-    //     vTaskDelay(pdMS_TO_TICKS(1000));
+    // while(1){
+    //     while(!isr_hit){
+    //         cnt = (int16_t)(REG_VAL(PCNT_U0_CNT_REG));
+    //         ESP_LOGI("ENC", "cnt: %hx", cnt);
+    //         ESP_LOGI("ENC", "g_state: %x", g_state);
+    //         ESP_LOGI("ENC", "status: %x", (unsigned int)(REG_VAL(PCNT_INT_ST_REG) & PCNT_CNT_THR_EVENT_U0_INT_ST));
+    //         ESP_LOGI("ENC", "ctrl_reg: %x", (unsigned int)REG_VAL(PCNT_CTRL_REG));
+    //         vTaskDelay(pdMS_TO_TICKS(1000));
+    //     }
+    //     ESP_LOGI("ENC", "ISR ran");
+    //     isr_hit = 0;
     // }
+    
     
     // disable conti mode
     REG_VAL(RMT_CH0CONF1_REG) &= ~RMT_TX_CONTI_MODE_CH0;
@@ -192,28 +205,37 @@ void app_main(void)
     // // Transmit Blue
     // rmt_fill_ws2812_data(0x0, 0x0, 0x80);
     // rmt_tx();
-
+    int prev_state = -3; // set to -3 as we need it to not be equal to g_state
     while (1) {
-        switch(g_state)
+        if(g_state != prev_state)
         {
-            case 0: 
-                rmt_fill_ws2812_data(0x80, 0x0, 0x0);
-                rmt_tx(); 
+            switch(g_state)
+            {
+                case 0: 
+                    ESP_LOGI("ENC", "green");
+                    rmt_fill_ws2812_data(0x80, 0x0, 0x0);
+                    rmt_tx(); 
+                    prev_state=g_state;
+                    break;
+                case 1: 
+                    ESP_LOGI("ENC", "red");
+                    rmt_fill_ws2812_data(0x0, 0x80, 0x0);
+                    rmt_tx();
+                    prev_state=g_state;
                 break;
-            case 1: 
-               rmt_fill_ws2812_data(0x0, 0x80, 0x0);
-               rmt_tx(); 
-               break;
-            case 2:
-                rmt_fill_ws2812_data(0x0, 0x0, 0x80);
-                rmt_tx(); 
-                break;
-            default:
-                rmt_fill_ws2812_data(0x80, 0x80, 0x80);
-                rmt_tx(); 
-                break;
+                case 2:
+                    ESP_LOGI("ENC", "blue");
+                    rmt_fill_ws2812_data(0x0, 0x0, 0x80);
+                    rmt_tx(); 
+                    prev_state=g_state;
+                    break;
+                default:
+                    ESP_LOGI("ENC", "unknown");
+                    rmt_fill_ws2812_data(0x99, 0x99, 0xff);
+                    rmt_tx(); 
+                    break;
+            }
         }
-        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 

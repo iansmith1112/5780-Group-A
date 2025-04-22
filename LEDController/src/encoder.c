@@ -10,7 +10,7 @@
 #include "soc/io_mux_reg.h"
 
 #define REG_VAL(addr)  (*(volatile uint32_t *)(uintptr_t)(addr))
-#define ENCAPIN 23               // pin used for encoder a
+#define ENCAPIN 23              // pin used for encoder a
 #define ENCBPIN 16              // pin used for encoder b
 #define STEPS_PER_DETENT  2     // 2 edges → 1 click
 
@@ -20,7 +20,6 @@ volatile int isr_hit = 0;
 // interrupt handler
 void IRAM_ATTR pcnt_isr(void)
 {
-    isr_hit = 1;
     /* Determine which unit fired; we only enabled U0 so read bit 0. */
     if (REG_VAL(PCNT_INT_ST_REG) & PCNT_CNT_THR_EVENT_U0_INT_ST) {
         int16_t cnt = REG_VAL(PCNT_U0_CNT_REG);
@@ -37,7 +36,9 @@ void IRAM_ATTR pcnt_isr(void)
 
         /* reset counter */
         REG_VAL(PCNT_CTRL_REG) |= PCNT_PLUS_CNT_RST_U0;
+        REG_VAL(PCNT_CTRL_REG) &= ~PCNT_PLUS_CNT_RST_U0;
     }
+    isr_hit = 1;
 }
 
 void pcnt_init(void)
