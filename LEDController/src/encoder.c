@@ -57,18 +57,8 @@ void pcnt_init(void)
     conf0 |= 500;                                      // Set threshold to 6.25us which is standard for encoders
     REG_VAL(PCNT_U0_CONF0_REG) = conf0;
 
-    // Now count both edges unconditionally
-    // uint32_t conf0 = (1 << PCNT_CH0_POS_MODE_U0_S)
-    // | (1 << PCNT_CH0_NEG_MODE_U0_S);
-
-
-    // REG_VAL(PCNT_U0_CONF2_REG) = ((uint32_t)(-1000) << 16) | (1000 & 0xFFFF);
-
     // Set thresholds ±STEPS_PER_DETENT
     REG_VAL(PCNT_U0_CONF1_REG) = (STEPS_PER_DETENT << 16) | (uint16_t)(-STEPS_PER_DETENT);
-
-    // High/low limit values
-    // REG_VAL(PCNT_U0_CONF2_REG) = ((uint16_t)(-STEPS_PER_DETENT) << 16) | (STEPS_PER_DETENT);
 
     // Resume counting
     REG_VAL(PCNT_CTRL_REG) &= ~(PCNT_PLUS_CNT_RST_U0 | PCNT_CNT_PAUSE_U0); // clear CNT_PAUSE_U0 
@@ -106,9 +96,9 @@ void setup_gpio_pcnt(void)
         // Enable the input by setting the FUN_IE bit.
         // Set or clear the FUN_WPU and FUN_WPD bits, as desired, to enable/disable internal pull-up/pull down resistors.
     REG_VAL(IO_MUX_GPIO23_REG) &= ~(FUN_PU | FUN_PD | MCU_SEL);  // disable pull down and up 
-    REG_VAL(IO_MUX_GPIO16_REG) &= ~(FUN_PU | FUN_PD | MCU_SEL); // disable pull down and up
-    REG_VAL(IO_MUX_GPIO23_REG) |= FUN_IE | 2 << MCU_SEL_S;      // enable fun_ie and AF to 2
-    REG_VAL(IO_MUX_GPIO16_REG) |= FUN_IE | 2 << MCU_SEL_S;     // enable fun_ie and AF to 2
+    REG_VAL(IO_MUX_GPIO16_REG) &= ~(FUN_PU | FUN_PD | MCU_SEL);  // disable pull down and up
+    REG_VAL(IO_MUX_GPIO23_REG) |= FUN_IE | 2 << MCU_SEL_S;       // enable fun_ie and AF to 2
+    REG_VAL(IO_MUX_GPIO16_REG) |= FUN_IE | 2 << MCU_SEL_S;       // enable fun_ie and AF to 2
 }
 
 void pcnt_isr_attach(void)
@@ -116,7 +106,8 @@ void pcnt_isr_attach(void)
     const int flags = ESP_INTR_FLAG_LEVEL1 | ESP_INTR_FLAG_IRAM;
 
     // Using IDF framework to install interrupt handler because dealing with the vector table will take me way too long 
-    // and I don't have the time to spend on that and is relatively out of the scope for the class. 
+    // and I don't have the time to spend on that and is relatively out of the scope for the class since the ESP32's vector table is 
+    // accessed differently than the STM32's
     esp_err_t err = esp_intr_alloc(48, // signal of PCNT_INTR
                                 flags,
                                 (intr_handler_t)pcnt_isr,
